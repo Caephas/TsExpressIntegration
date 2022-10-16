@@ -12,15 +12,10 @@ function requireAuth(req, res, next) {
 }
 var router = (0, express_1.Router)();
 exports.router = router;
-router.get('/logout', function (req, res) {
-    res.send("<div>\n        <form>\n            <input type=\"submit\" name=\"Gremblin\"></input>\n        <form/>\n    </div>");
-});
 router.post('/login', function (req, res) {
     var _a = req.body, email = _a.email, password = _a.password;
-    if (email && password && email === 'arinze@gmail.com' && password === "Caephas") {
-        //give user session
+    if (email && password && email === 'hi@hi.com' && password === 'password') {
         req.session = { loggedIn: true };
-        //redirect to root page
         res.redirect('/');
     }
     else {
@@ -29,10 +24,10 @@ router.post('/login', function (req, res) {
 });
 router.get('/', function (req, res) {
     if (req.session && req.session.loggedIn) {
-        res.send("\n        <div>\n            <div>You are logged in</div>\n            <a href=\"/logout\">Logout</a>\n        </div>\n        ");
+        res.send("\n      <div>\n        <div>You are logged in</div>\n        <a href=\"/logout\">Logout</a>\n      </div>\n    ");
     }
     else {
-        res.send("\n                <div>\n                    <div>You are not logged in</div>\n                    <a href=\"/login\">Login</a>\n                </div>\n            ");
+        res.send("\n      <div>\n        <div>You are not logged in</div>\n        <a href=\"/login\">Login</a>\n      </div>\n    ");
     }
 });
 router.get('/logout', function (req, res) {
@@ -40,5 +35,5 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 router.get('/protected', requireAuth, function (req, res) {
-    res.send('welcome to protected route, logged in user');
+    res.send('Welcome to protected route, logged in user');
 });
